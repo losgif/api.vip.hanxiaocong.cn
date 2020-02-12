@@ -49,28 +49,29 @@
         <input name="school_id" type="hidden" value="{{ $school }}">
 
         <div class="app">
-            <h3 style="text-align:center">{{$schoolName}}</h3>
+            <h1 style="text-align:center">{{$schoolName}}</h1>
             <div style="text-align:center">
-            <img src="/image/22.jpg">
+            <img src="/image/2.jpg">
             </div>
             <div style="margin-top:-20px;">
                 <div class="rule">    
                     <span style="color: red; display:block;padding-top: 20px;font-size:16px;">
-                        济南大学助手卖舍友游戏规则
+                        大型生活服务类节目游戏规则
                     </span>
                 </div>
                 <div class="rule">
-                        <span>1.可以适当的黑自己的舍友、闺蜜、好基友~济南大学助手会进行审核然后发布。最重要的是，欢迎冒充舍友自黑!</span>
+                        <span>1.可以适当卖自己的舍友、兄弟、闺蜜，帮助他们脱单，平台会进行审核然后发布。最重要的是，欢迎冒充自黑!</span>
                         <div class="rule_o">
                         <span class="rule_t">我们的原则是：有对象的不能上。 </span>
                         <span class="rule_t">同时拒绝无脑低端黑，希望大家遵守。</span>
+                        <span class="rule_t">切记！！！一定要征得本人同意！！！</span>
                         </div>
                 </div>
                 <div class="rule">
-                        <span>2.我们不会将任何一个人的联系方式直接发布到网络。想知道他的联系方式吗？在平台里直接发送编号（如love999），即可收到TA的联系方式 </span>                   
+                        <span>2.我们不会将任何一个人的联系方式直接发布到网络。想知道他的联系方式吗？在平台里直接发送编号（如LOVE999），即可收到TA的联系方式 </span>                   
                 </div>
                 <div class="rule">
-                        <span>3.已报名但没有上当日图文的同学，不要着急，一周内就会有你。</span>                 
+                        <span>3.已报名但没有上当日图文的童鞋，不要着急，一周内就会有你。</span>                 
                 </div>
                 <div class="rule">
                         <span>4.关于上传照片要求 </span>                  
@@ -80,19 +81,19 @@
                         </div>    
                 </div>
                 <div class="rule">
-                        <span>5.快来“卖”自己有趣的舍友！cheeky</span>      
+                        <span>5.快来“卖”自己有趣且单身的舍友/兄弟/姐妹！cheeky</span>      
                 </div>
                 <div class="rule">
-                        <span>6.如果被卖人不希望被打扰或已成功脱单，请联系我们，我们会及时删除你的联系方式。</span>                       
+                        <span>6.如果被卖人不希望被打扰或已成功脱单，请联系客服，我们会及时删除你的联系方式。</span>                       
                 </div>
                 <div class="rule">
-                        <span>7.济南大学助手卖舍友，让你从此不再一个人。同学们赶紧拿起手中的手机订购吧!</span>       
+                        <span>7.本平台大型脱单服务栏目，让你从此不再一个人。</span>       
                 </div>
                 <div class="rule">
-                        <span>8.济南大学助手开发，bug及建议反馈请联系小葱：ujnhand@qq.com</span>
+                        <span>8.本功能有小葱工作室开发，有问题请联系：ujnhand@qq.com</span>
                 </div>
             </div>
-            <div class="weui-cells__title">被卖人（昵称）*</div>
+            <div class="weui-cells__title">被卖人（TA的昵称）*</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -102,7 +103,7 @@
             </div>
             <div class="weui-cells__tips">tips：必填！！！乱填或空着可能会减少上舍友的几率哦~</div>
 
-            <div class="weui-cells__title">性别 *</div>
+            <div class="weui-cells__title">TA的性别 *</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -114,7 +115,7 @@
                 </div>
             </div>
 
-            <div class="weui-cells__title">学院与年级 *</div>
+            <div class="weui-cells__title">学院与年级或者毕业学校 *</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -122,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="weui-cells__tips">tips：必填！！！乱填或空着可能会减少上舍友的几率哦~</div>
+            <div class="weui-cells__tips">tips：必填！！！乱填或空着可能会减少上的几率哦~</div>
 
             <div class="weui-cells__title">TA的联系方式（标注微信或者QQ*)</div>
             <div class="weui-cells">
@@ -144,7 +145,7 @@
             </div>
             <div class="weui-cells__tips">tips：必填！以便随时沟通联系</div>
 
-            <div class="weui-cells__title">舍友身高 *</div>
+            <div class="weui-cells__title">TA的身高 *</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -153,7 +154,7 @@
                 </div>
             </div>
 
-            <div class="weui-cells__title">舍友产地 (出生地）*</div>
+            <div class="weui-cells__title">TA的产地 (出生地）*</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -162,18 +163,18 @@
                 </div>
             </div>
 
-            <div class="weui-cells__title">描述舍友（爆料）*</div>
+            <div class="weui-cells__title">描述舍友/兄弟/姐妹/（爆料）简短个人介绍*</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请输入爆料内容" rows="3" name="detail"></textarea>
+                        <textarea class="weui-textarea" placeholder="请输入爆料内容，做一个简短介绍" rows="3" name="detail"></textarea>
                     </div>
                 </div>
             </div>
             <div class="weui-cells__tips">tips：写上他的品质以及兴趣爱好。            
             我想你认真对待的话，别人也会认真了解你～</div>
 
-            <div class="weui-cells__title">Ta（舍友）对另一半的期望（喜欢哪种类型）*</div>
+            <div class="weui-cells__title">Ta对另一半的期望（喜欢哪种类型）*</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -183,7 +184,7 @@
             </div>
             <div class="weui-cells__tips">tips：结合现实，遵循本心~</div>
 
-            <div class="weui-cells__title">选择图片</div>
+            <div class="weui-cells__title">TA的撩妹（汉）皂片</div>
             <div class="weui-cell" id="upload-container">
                 <a class="btn btn-default btn-lg" id="pickfiles" href="#" >
                     <input class="weui-input" type="file" name="upload_url">
@@ -194,7 +195,7 @@
             <div class="weui-cells__tips">tips：请附上你的清晰照，照片上传成功后再提交哦！</div>
 
             <div class="weui-btn-area">
-                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="submitForm()">提交</a>
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="submitForm()">提交报名</a>
             </div>         
         </div>  
     </form>  
@@ -206,7 +207,7 @@
 <script>
     //判断是否上传成功
     if ( {{ $result }} ) {
-        alert("信息提交成功")
+        alert("报名提交成功")
     }
     //表单提交
     function submitForm () {

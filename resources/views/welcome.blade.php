@@ -52,14 +52,15 @@
             <div style="margin-top:-20px;">
                 <div class="rule">    
                     <span style="color: red; display:block;padding-top: 20px;font-size:16px;">
-                        济南大学助手卖舍友游戏规则
+                        大型生活情感类服务节目
                     </span>
                 </div>
                 <div class="rule">
-                        <span>1.可以适当的黑自己的舍友、闺蜜、好基友~济南大学助手会进行审核然后发布。最重要的是，欢迎冒充舍友自黑!</span>
+                        <span>1.可以适当的黑自己的舍友、闺蜜、好基友~平台进行审核后发布。最重要的是，欢迎冒充舍友自黑!</span>
                         <div class="rule_o">
                         <span class="rule_t">我们的原则是：有对象的不能上。 </span>
                         <span class="rule_t">同时拒绝无脑低端黑，希望大家遵守。</span>
+                        <span class="rule_t">一定要征得当事人同意！！！！！！</span>
                         </div>
                 </div>
                 <div class="rule">

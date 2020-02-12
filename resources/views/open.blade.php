@@ -29,17 +29,17 @@
     <script src="https://cdn.bootcss.com/clipboard.js/2.0.0/clipboard.min.js"></script>
 </head>
 <body>
-    <p>▼在你与济南大学助手的聊天框回复相应编号</p><br>
-    <p> 如：love999，即可获得联系方式</p><br>
+    <p>▼▼在平台的聊天框回复对应选手编号▼▼</p><br>
+    <p> 如：LOVE999，即可获得联系方式</p><br>
     @foreach($infos as $info)
 
     <div>
         <div><span><img width="100%" src='{{$info["upload_url"]}}'></span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsplove{{$info['id']}}&nbsp</span></div>
+        <div><span class="{{$info['sex']}}">&nbsp&nbsp编号：love{{$info['id']}}&nbsp</span></div>
         <div><div style="display:block;"><hr class="{{$info['sex']}}" size='5'/></div></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp昵称：</span><span>{{$info['name']}}</span></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp产地：</span><span>{{$info['brith_place']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp学院：</span><span>{{$info['grade']}}</span></div>
+        <div><span class="{{$info['sex']}}">&nbsp&nbsp学校：</span><span>{{$info['grade']}}</span></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp身高：</span><span>{{$info['height']}}</span></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp个人描述：</span><span>{{$info['detail']}}</span></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp匹配对象：</span><span>{{$info['expect']}}</span></div>

@@ -30,20 +30,20 @@ class ServeController extends Controller
                         $info = Info::find($id);
 
                         if ($info) {
-                            return " 济南大学助手竭诚为您服务\n\n/玫瑰/玫瑰/玫瑰<a href='http://maisheyou.mreex.com/'>点击卖舍友</a> /玫瑰/玫瑰/玫瑰\n\n回复：教务，进入微信教务系统\n可以查询成绩、课表、自习室等\n\n济南大学助手提供该嘉宾\n联系方式：" . $info->ta_tel; 
+                            return "您好，感谢您对本栏目的支持\n\n欢迎给自己报名，祝您早日脱单\n\n该选手联系方式↓\n\n" . $info->ta_tel; 
                         } else {
                             return '该编号不存在';
                         }
 
                     } else {
-                        return "您好！欢迎您使用济南大学助手卖舍友功能，收到这段话，可能是因为您操作失误啦!";
+                        return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nlove+编号例如↓\n\nlove999";
                     }
 
                     break;
                 
                 default:
                     # code...
-                    return "您好！欢迎您使用济南大学助手卖舍友功能，收到这段话，可能是因为您操作失误啦!";
+                    return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nlove+编号例如↓\n\nlove999";
 
                     break;
             }
