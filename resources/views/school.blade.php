@@ -220,6 +220,8 @@
         var birth_place = document.getElementsByName('brith_place')[0].value
         var detail      = document.getElementsByName('detail')[0].value
         var expect      = document.getElementsByName('expect')[0].value
+        let upload_url  = document.getElementById('upload_url').value
+
         if ( '' == name ) {
             alert("昵称不可为空!")
             return false;
@@ -246,6 +248,9 @@
             return false;
         } else if ( '' == expect ) {
             alert("期望不可为空!")
+            return false;
+        } else if ( '' == upload_url ) {
+            alert("请上传照片!")
             return false;
         } else {
             $('form').submit();
