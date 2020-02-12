@@ -25,6 +25,7 @@ class CreateInfosTable extends Migration
             $table->text('detail');
             $table->text('expect');
             $table->string('upload_url');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

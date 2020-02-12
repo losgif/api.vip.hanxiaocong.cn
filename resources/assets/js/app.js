@@ -19,9 +19,19 @@ Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(ElementUI);
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         component: require('./components/userInfo.vue')
+    }, {
+        path: '/school',
+        component: require('./components/school.vue')
+    }, {
+        path: '/addSchool',
+        component: require('./components/addSchool.vue')
+    }, {
+        path: '/user',
+        component: require('./components/user.vue')
     }
 ]
 

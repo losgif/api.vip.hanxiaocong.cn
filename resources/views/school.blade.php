@@ -46,9 +46,10 @@
     <form action="/upload" method="POST">
         {{ csrf_field() }}
 
-        <input name="school" type="hidden" value="{{ $school }}">
+        <input name="school_id" type="hidden" value="{{ $school }}">
 
         <div class="app">
+            <h3 style="text-align:center">{{$schoolName}}</h3>
             <div style="text-align:center">
             <img src="/image/22.jpg">
             </div>
@@ -271,7 +272,7 @@
             // save_key: true,                  // 默认 false。若在服务端生成 uptoken 的上传策略中指定了 `save_key`，则开启，SDK在前端将不对key进行任何处理
             domain: '{{ $domain }}',     // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
             container: 'upload-container',             // 上传区域 DOM ID，默认是 browser_button 的父元素，
-            max_file_size: '100mb',             // 最大文件体积限制
+            max_file_size: '5mb',             // 最大文件体积限制
             flash_swf_url: '{{ asset("Moxie.swf") }}',  //引入 flash,相对路径
             max_retries: 3,                     // 上传失败最大重试次数
             dragdrop: true,                     // 开启可拖曳上传

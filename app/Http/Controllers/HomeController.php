@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use EasyWeChat\Kernel\Messages\Text;
 use App\Info;
-
+use Auth;
 
 class HomeController extends Controller
 {
@@ -29,12 +29,17 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function open(Request $request){
+    public function open(Request $request)
+    {
         $this->validate($request, [
             'array' => 'required'
         ]);
 
-        $ids = json_decode($request->array);
+        $ids = json_decode($request->array, true);
+
+        Info::whereIn('id', $ids)->update([
+            'is_active' => 1
+        ]);
 
         foreach ($ids as $key => $value) {
             $infos[$key] = Info::find($value)->toArray();
@@ -43,8 +48,26 @@ class HomeController extends Controller
         return view('open',compact('infos'));
     }
 
-    public function getAllInfo(Request $request, Info $info)
+    public function getAllInfo(Request $request)
     {
+        $filters = $request->filters;
+
+        $user = Auth::user();
+
+        if ($user->is_admin) {
+            $info = new Info();
+        } else {
+            $info = $user->info();
+        }
+        
+        if (isset($filters['school_id']) and !empty($filters['school_id'])) {
+            $info = $info->whereIn('school_id', $filters['school_id']);
+        }
+
+        if (isset($filters['sex']) and !empty($filters['sex'])) {
+            $info = $info->whereIn('sex', $filters['sex']);
+        }
+
         $info = $info->orderBy('id', 'desc')->paginate(10);
 
         if ($info) {
