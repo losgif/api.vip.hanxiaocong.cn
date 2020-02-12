@@ -115,11 +115,11 @@
                 </div>
             </div>
 
-            <div class="weui-cells__title">学院与年级或者毕业学校 *</div>
+            <div class="weui-cells__title">学校学院年级或者毕业学校 *</div>
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="grade" placeholder="输入学院或年级"/>
+                        <input class="weui-input" type="text" name="grade" placeholder="输入学校学院年级"/>
                     </div>
                 </div>
             </div>
