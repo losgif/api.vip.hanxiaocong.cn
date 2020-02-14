@@ -22,3 +22,5 @@ Route::group(['prefix' => 'upload'], function() {
     Route::post('info', 'UploadController@info');
     Route::post('image', 'UploadController@image');
 });
+
+Route::any('site/{school}', 'SiteController@show');
