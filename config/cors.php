@@ -1,0 +1,20 @@
+<?php
+
+return [
+    'allow-credentials'  => env('CORS_ALLOW_CREDENTIAILS', true), // set "Access-Control-Allow-Credentials" 👉 string "false" or "true".
+    'allow-headers'      => ['*'], // ex: Content-Type, Accept, X-Requested-With
+    'expose-headers'     => [],
+    'origins'            => [
+        '*',
+        'http://192.168.1.14:8000'
+    ], // ex: http://localhost
+    'methods'            => [
+        '*',
+        'OPTIONS'
+    ], // ex: GET, POST, PUT, PATCH, DELETE
+    'max-age'            => env('CORS_ACCESS_CONTROL_MAX_AGE', 0),
+    'laravel'            => [
+        'allow-route-prefix' => env('CORS_LARAVEL_ALLOW_ROUTE_PREFIX', 'api/*'), // The prefix is using \Illumante\Http\Request::is method. 👉
+        'route-group-mode'   => env('CORS_LARAVEL_ROUTE_GROUP_MODE', false),
+    ],
+];

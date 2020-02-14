@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use EasyWeChat\Kernel\Messages\Text;
-use App\Info;
-use Auth;
 
-class HomeController extends Controller
+class InformationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,9 +23,9 @@ class HomeController extends Controller
      */
     public function index() 
     {
-        return view('home');
+        return view('information');
     }
-
+    
     public function open(Request $request)
     {
         $this->validate($request, [
