@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'upload', 'middleware' => 'cors-should'], function() {
-    Route::any('/', 'UploadController@info');
-    Route::any('info', 'UploadController@info');
-    Route::any('image', 'UploadController@image');
+Route::group(['prefix' => 'upload'], function() {
+    Route::post('/', 'UploadController@info');
+    Route::post('info', 'UploadController@info');
+    Route::post('image', 'UploadController@image');
 });

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // 强制全站HTTPS
-        // \URL::forceScheme('https');
+        \URL::forceScheme('https');
+
+        // 修改默认String长度
+        Schema::defaultStringLength(191);
     }
 
     /**

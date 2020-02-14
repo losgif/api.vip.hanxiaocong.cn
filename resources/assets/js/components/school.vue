@@ -44,7 +44,7 @@
           label="上传入口"
           width="">
           <template slot-scope="scope">
-            {{ origin }}/{{ scope.row.id }}
+            {{ origin }}/information/#/goddess/home/{{ scope.row.id }}
           </template>
           </el-table-column>
           <el-table-column

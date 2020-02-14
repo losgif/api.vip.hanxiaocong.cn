@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Information;
+use Auth;
 
 class InformationController extends Controller
 {
@@ -15,16 +17,6 @@ class InformationController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() 
-    {
-        return view('information');
-    }
     
     public function open(Request $request)
     {
@@ -34,15 +26,15 @@ class InformationController extends Controller
 
         $ids = json_decode($request->array, true);
 
-        Info::whereIn('id', $ids)->update([
+        Information::whereIn('id', $ids)->update([
             'is_active' => 1
         ]);
 
         foreach ($ids as $key => $value) {
-            $infos[$key] = Info::find($value)->toArray();
+            $infos[$key] = Information::find($value)->toArray();
         }
 
-        return view('open',compact('infos'));
+        return view('openInformation',compact('infos'));
     }
 
     public function getAllInfo(Request $request)
@@ -52,9 +44,9 @@ class InformationController extends Controller
         $user = Auth::user();
 
         if ($user->is_admin) {
-            $info = new Info();
+            $info = new information();
         } else {
-            $info = $user->info();
+            $info = $user->information();
         }
         
         if (isset($filters['school_id']) and !empty($filters['school_id'])) {

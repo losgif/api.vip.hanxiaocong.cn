@@ -63,17 +63,22 @@
           label="性别"
           width="80"
           column-key="sex"
-          :filters="[{ text: '男', value: 'man' }, { text: '女', value: 'woman' }]"
+          :filters="[{ text: '男', value: 'male' }, { text: '女', value: 'female' }]"
           :filter-method="filterHandler">
           </el-table-column>
           <el-table-column
-          prop="ta_tel"
+          prop="contact_account"
           label="Ta的联系方式"
           width="120">
           </el-table-column>
           <el-table-column
-          prop="my_tel"
-          label="我的联系方式"
+          prop="university"
+          label="学校"
+          width="120">
+          </el-table-column>
+          <el-table-column
+          prop="department"
+          label="院系"
           width="120">
           </el-table-column>
           <el-table-column
@@ -82,25 +87,30 @@
           width="80">
           </el-table-column>
           <el-table-column
-          prop="brith_place"
+          prop="constellation"
+          label="星座"
+          width="120">
+          </el-table-column>
+          <el-table-column
+          prop="origin"
           label="出生地"
           width="80">
           </el-table-column>
           <el-table-column
-          prop="detail"
-          label="爆料"
+          prop="weibo"
+          label="微博"
           width="300">
           </el-table-column>
           <el-table-column
-          prop="expect"
-          label="期望"
+          prop="specialty"
+          label="特长"
           width="300">
           </el-table-column>
           <el-table-column 
           label="图片"
           width="300">
           <template slot-scope="scope">
-              <img :src="scope.row.upload_url" class="upload_url" height="120"/>
+              <img :src="scope.row.person_image" class="person-image" height="120"/>
           </template>
           </el-table-column>
           <el-table-column
@@ -108,21 +118,20 @@
           label="创建时间"
           width="160">
           </el-table-column>
-
-          <!-- <el-table-column
+          <el-table-column
           fixed="right"
           label="操作"
-          width="100">
+          width="200">
           <template slot-scope="scope">
-              <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-              <el-button type="text" size="small">编辑</el-button>
+              <el-button @click="handleClick(scope.row.extra)" type="danger" size="small">查看问题</el-button>
+              <el-button @click="handleClickStyle(scope.row.id)" type="success" size="small">生成样式</el-button>
           </template>
-          </el-table-column> -->
+          </el-table-column>
       </el-table>
 
-      <div style="margin:20px; text-align:center; ">
+      <!-- <div style="margin:20px; text-align:center; ">
           <el-button @click="open">样式生成</el-button>
-      </div>
+      </div> -->
       
       <el-pagination
       class="text-center"
@@ -143,8 +152,49 @@ export default {
       const property = column['property'];
       return row[property] === value;
     },
+    handleClickStyle(id) {
+      var url =
+        '<iframe src="/open?array=' +
+        encodeURI("[" + id + "]") +
+        '" height="100%" width="100%" frameborder=0></iframe>';
+        
+      this.$alert(url, "HTML 片段", {
+        dangerouslyUseHTMLString: true,
+        title: "",
+        showClose: true,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: "关闭"
+      }).catch(() => {
+        
+      });
+    },
     handleClick(row) {
-      console.log(row);
+      row = JSON.parse(row)
+
+      let content = '<div style="height:100%; width:100%; overflow: scroll">'
+      
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          const e = row[key];
+          content += `<div><h5>${e.title}</h5></div>`
+          content += `<div><h5>${e.content}</h5></div>`
+          content += `<div><img width="100%" src='${e.image}'/></div>`
+        }
+      }
+
+      content += '</div>'
+        
+      this.$alert(content, "HTML 片段", {
+        dangerouslyUseHTMLString: true,
+        title: "",
+        showClose: true,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: "关闭"
+      }).catch(() => {
+        
+      });
     },
     open() {
       var url =

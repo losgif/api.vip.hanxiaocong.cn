@@ -29,6 +29,7 @@ class CreateInformationTable extends Migration
             $table->string('specialty');
             $table->string('person_image');
             $table->text('extra');
+            $table->integer('is_active')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

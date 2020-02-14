@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use EasyWeChat\Kernel\Messages\Text;
 use App\Info;
 use Auth;
 

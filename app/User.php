@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Info::class, School::class);
     }
+
+    public function information()
+    {
+        return $this->hasManyThrough(Information::class, School::class);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
-use App\Info;
+use App\Information;
 
 class ServeController extends Controller
 {
@@ -27,10 +27,10 @@ class ServeController extends Controller
                     if (isset($matches[2])) {
                         $id = $matches[2];
 
-                        $info = Info::find($id);
+                        $info = Information::find($id);
 
                         if ($info) {
-                            return "您好，感谢您对本栏目的支持\n\n欢迎给自己报名，祝您早日脱单\n\n该选手联系方式↓\n\n" . $info->ta_tel; 
+                            return "您好，感谢您对本栏目的支持\n\n欢迎给自己报名，祝您早日脱单\n\n该选手联系方式↓\n\n" . $info->contact_account; 
                         } else {
                             return '该编号不存在';
                         }

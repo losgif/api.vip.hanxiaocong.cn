@@ -35,9 +35,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Home', 'middleware' => 'auth']
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::post('/getAllInfo', 'HomeController@getAllInfo');
-
-Route::get('/open', 'HomeController@open');
+Route::post('/getAllInfo', 'InformationController@getAllInfo');
+Route::get('/open', 'InformationController@open');
 
 Route::get('/{school}', 'Home\IndexController@school');
