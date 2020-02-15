@@ -22,7 +22,7 @@ class ServeController extends Controller
             switch ($message['MsgType']) {
                 case 'text':
                     
-                    preg_match('/(love)(\d{1,6})/', $message['Content'], $matches);
+                    preg_match('/(BG)(\d{1,6})/', $message['Content'], $matches);
 
                     if (isset($matches[2])) {
                         $id = $matches[2];
@@ -36,14 +36,14 @@ class ServeController extends Controller
                         }
 
                     } else {
-                        return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nlove+编号例如↓\n\nlove999";
+                        return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nBG+编号例如↓\n\nBG999";
                     }
 
                     break;
                 
                 default:
                     # code...
-                    return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nlove+编号例如↓\n\nlove999";
+                    return "您好！/玫瑰/玫瑰/玫瑰\n\n欢迎您使用此功能，收到这段话，\n\n可能是因为您操作失误啦!\n\n可以联系平台客服反馈\n\n正确回复方式↓\n\nBG+编号例如↓\n\nBG999";
 
                     break;
             }

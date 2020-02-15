@@ -48,11 +48,11 @@
     <div>
         <div class="info">
             <div><img width="100%" src='{{$info["person_image"]}}'></div>
-            <div><span style="font-size: 16px; color: red;" class="{{$info['sex']}}">&nbsp&nbsp编号：love{{$info['id']}}&nbsp</span></div>
+            <div><span style="font-size: 16px; color: red;" class="{{$info['sex']}}">&nbsp&nbsp编号：BG{{$info['id']}}&nbsp</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp昵称：</span><span>{{$info['name']}}</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp产地：</span><span>{{$info['origin']}}</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp学校：</span><span>{{$info['university']}}</span></div>
-            <div><span class="{{$info['sex']}}">&nbsp&nbsp院系：</span><span>{{$info['department']}}</span></div>
+            <div><span class="{{$info['sex']}}">&nbsp&nbsp座右铭：</span><span>{{$info['department']}}</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp身高：</span><span>{{$info['height']}}CM</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp星座：</span><span>{{$info['constellation']}}</span></div>
             <div><span class="{{$info['sex']}}">&nbsp&nbsp微博：</span><span>{{$info['weibo']}}</span></div>

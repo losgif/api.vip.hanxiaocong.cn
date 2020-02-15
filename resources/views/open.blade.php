@@ -35,7 +35,7 @@
 
     <div>
         <div><span><img width="100%" src='{{$info["upload_url"]}}'></span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp编号：love{{$info['id']}}&nbsp</span></div>
+        <div><span class="{{$info['sex']}}">&nbsp&nbsp编号：BG{{$info['id']}}&nbsp</span></div>
         <div><div style="display:block;"><hr class="{{$info['sex']}}" size='5'/></div></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp昵称：</span><span>{{$info['name']}}</span></div>
         <div><span class="{{$info['sex']}}">&nbsp&nbsp产地：</span><span>{{$info['brith_place']}}</span></div>
