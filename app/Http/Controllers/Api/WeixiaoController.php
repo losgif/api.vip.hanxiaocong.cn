@@ -11,6 +11,7 @@ use App\Jobs\UpdateKeyword;
 use App\Services\Weixiao;
 use App\Services\UrlSign;
 use App\School;
+use App\ApplicationPlatform;
 use App\Information;
 use EasyWeChat\Kernel\Messages;
 
@@ -225,7 +226,12 @@ class WeixiaoController extends Controller
             if (empty($user)) {
                 return redirect(config('app.front_url') . '/403');
             } else {
-                $redirectUrl = \urlencode("/goddess/${mediaId}");
+                $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
+                $application = $applicationPlatform->application;
+
+                $schoolapplication = $user->application()->where('application_id', $application->id)->first();
+
+                $redirectUrl = \urlencode("/goddess/{$schoolapplication->id}");
                 
                 $url = config('app.front_url') . "/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
                 return redirect($url);

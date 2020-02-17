@@ -23,7 +23,7 @@ class School extends Model
      */
     public function information()
     {
-        return $this->hasMany(Information::class);
+        return $this->hasManyThrough(Information::class, SchoolApplication::class);
     }
 
     /**

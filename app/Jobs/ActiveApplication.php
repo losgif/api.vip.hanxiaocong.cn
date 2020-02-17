@@ -15,6 +15,7 @@ use App\ApplicationPlatform;
 use DB;
 use Illuminate\Support\Str;
 use Hash;
+use Spatie\Permission\Models\Role;
 
 class ActiveApplication implements ShouldQueue
 {
@@ -47,6 +48,9 @@ class ActiveApplication implements ShouldQueue
             $user->password = Hash::make(Str::random(6));
             
             $user->save();
+
+            $role = Role::where('id', 1)->first();
+            $user->assignRole($role);
 
             $applicationPlatform = ApplicationPlatform::where('key', $this->parameters['api_key'])->where(['type' => 'weixiao'])->first();
             $application = $applicationPlatform->application;

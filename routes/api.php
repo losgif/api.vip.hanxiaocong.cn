@@ -70,6 +70,7 @@ Route::group([
     ], function () {
         Route::any('applications', 'WorkplaceController@applications');
         Route::any('activity', 'WorkplaceController@activity');
+        Route::any('data', 'WorkplaceController@data');
     });
 
     Route::group([

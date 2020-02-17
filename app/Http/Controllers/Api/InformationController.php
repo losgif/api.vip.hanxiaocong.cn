@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Services\UrlSign;
+use Auth;
 
 class InformationController extends Controller
 {
@@ -82,7 +83,9 @@ class InformationController extends Controller
         }
 
         try {
-            $schoolApplication = SchoolApplication::where('id', $request->id)->first();
+            $user = Auth::user();
+            
+            $schoolApplication = $user->application->where('id', $request->id)->first();
 
             $informations = $schoolApplication->information()->orderBy('id', 'desc')->paginate();
 
