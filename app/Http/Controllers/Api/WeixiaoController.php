@@ -223,15 +223,15 @@ class WeixiaoController extends Controller
             $user = $school->user;
 
             if (empty($user)) {
-                return redirect('https://ujnhand.losgif.com/403');
+                return redirect(config('app.front_url') . '/403');
             } else {
                 $redirectUrl = \urlencode("/goddess/${mediaId}");
                 
-                $url = "https://ujnhand.losgif.com/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
+                $url = config('app.front_url') . "/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
                 return redirect($url);
             }
         } else {
-            return redirect('https://ujnhand.losgif.com/500');
+            return redirect(config('app.front_url') . '/500');
         }
     }
 
