@@ -15,8 +15,16 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('name');
+            $table->integer('user_id')->default(0);
+            $table->string('name')->nullable();
+            $table->string('media_number')->nullable();
+            $table->string('avatar_image')->nullable();
+            $table->string('media_id');
+            $table->string('media_type')->nullable();
+            $table->string('media_url')->nullable();
+            $table->string('school_name')->nullable();
+            $table->string('school_code')->nullable();
+            $table->tinyInteger('verify_type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -30,7 +30,7 @@
 </head>
 <body>
     <p>▼▼在平台的聊天框回复对应选手编号▼▼</p><br>
-    <p> 如：LOVE999，即可获得联系方式</p><br>
+    <p> 如：BG999，即可获得联系方式</p><br>
     @foreach($infos as $info)
 
     <div>

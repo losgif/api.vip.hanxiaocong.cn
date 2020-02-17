@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \App\Http\Middleware\EnableCrossRequestMiddleware::class,
+            \Fruitcake\Cors\HandleCors::class,
             'throttle:60,1',
             'bindings',
         ],
