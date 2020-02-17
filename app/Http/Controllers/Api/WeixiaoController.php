@@ -75,7 +75,7 @@ class WeixiaoController extends Controller
         $result = $this->validatorSign($data, $sign);
 
         if ($result) {
-            CloseApplication::dispatch($data);
+            CloseApplication::dispatchNow($data);
 
             $response = [
                 'errcode' => 0,
@@ -172,7 +172,7 @@ class WeixiaoController extends Controller
 
             return $response;
         } else {
-            ActiveApplication::dispatch($parameters);
+            ActiveApplication::dispatchNow($parameters);
         }
     }
 
@@ -190,7 +190,8 @@ class WeixiaoController extends Controller
         $result = $this->validatorSign($data, $sign);
 
         if ($result) {
-            UpdateKeyword::dispatch($data['media_id'], $data['keyword'])->delay(now()->addSeconds(10));
+            UpdateKeyword::dispatchNow($data['media_id'], $data['keyword']);
+            // UpdateKeyword::dispatch($data['media_id'], $data['keyword'])->delay(now()->addSeconds(10));
 
             $response = [
                 'errcode' => 0,
@@ -255,7 +256,7 @@ class WeixiaoController extends Controller
         $result = $this->validatorSign($data, $sign);
 
         if ($result) {
-            ActiveApplication::dispatch($data);
+            ActiveApplication::dispatchNow($data);
             
             $response = [
                 'errcode' => 0,
