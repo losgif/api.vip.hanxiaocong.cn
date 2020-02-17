@@ -48,6 +48,7 @@ Route::group([
         'prefix' => 'information'
     ], function () {
         Route::any('search', 'InformationController@search');
+        Route::get('preview', 'InformationController@preview');
     });
 });
 

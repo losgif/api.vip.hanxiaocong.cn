@@ -170,4 +170,23 @@ class InformationController extends Controller
             return $this->failed($th->getMessage());
         }
     }
+
+    public function preview(Request $request)
+    {
+        $this->validate($request, [
+            'array' => 'required'
+        ]);
+
+        $ids = json_decode($request->array, true);
+
+        Information::whereIn('id', $ids)->update([
+            'is_active' => 1
+        ]);
+
+        foreach ($ids as $key => $value) {
+            $infos[$key] = Information::find($value)->toArray();
+        }
+
+        return view('openInformation',compact('infos'));
+    }
 }

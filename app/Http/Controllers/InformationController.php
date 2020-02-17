@@ -7,17 +7,7 @@ use App\Information;
 use Auth;
 
 class InformationController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+{    
     public function open(Request $request)
     {
         $this->validate($request, [
