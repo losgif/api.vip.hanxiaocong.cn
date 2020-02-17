@@ -33,6 +33,23 @@ class CloseApplication implements ShouldQueue
      */
     public function handle()
     {
-        // 关闭应用回调
+        DB::beginTransaction();
+
+        try {
+            $school = School::where('media_id', $this->parameters['media_id'])->first();
+
+            $applicationPlatform = ApplicationPlatform::where('key', $this->parameters['api_key'])->where(['type' => 'weixiao'])->first();
+            $application = $applicationPlatform->application;
+
+            $schoolApplication = $school->schoolApplication()->where('application_id', $application->id)->get();
+            
+            $schoolApplication->information()->delete();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            
+            throw $th;
+        }
     }
 }
