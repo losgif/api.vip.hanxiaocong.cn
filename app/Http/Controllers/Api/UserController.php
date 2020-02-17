@@ -8,6 +8,7 @@ use Validator;
 use DB;
 use App\User;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class UserController extends Controller
 {
@@ -56,8 +57,8 @@ class UserController extends Controller
     public function getInfo(Request $request)
     {
         try {
-            // $user = Auth::user();
-            $user = User::where('id', 1)->with([
+            $user = Auth::user();
+            $user = User::where('id', $user->id)->with([
                 'role' => function ($r) {
                     $r->with([
                         'permission' => function ($p) {

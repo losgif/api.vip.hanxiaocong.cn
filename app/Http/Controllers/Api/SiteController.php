@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\School;
+use App\SchoolApplication;
 
 class SiteController extends Controller
 {
-    public function show(School $school)
+    public function show(SchoolApplication $schoolApplication)
     {
-        return $this->success($school->name);
+        return $this->success($schoolApplication->name);
     }
 }

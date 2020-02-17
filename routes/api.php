@@ -23,7 +23,7 @@ Route::group([
     });
 
     Route::group(['prefix' => 'site'], function() {
-        Route::any('{school}', 'SiteController@show');
+        Route::any('{schoolApplication}', 'SiteController@show');
     });
     
     Route::group([
@@ -77,6 +77,7 @@ Route::group([
         'prefix' => 'information'
     ], function () {
         Route::any('indexByApplicationId', 'InformationController@indexByApplicationId');
+        Route::any('batchDelete', 'InformationController@batchDelete');
     });
 
     Route::apiResources([

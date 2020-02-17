@@ -139,4 +139,35 @@ class InformationController extends Controller
     {
         //
     }
+
+    public function batchDelete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'keys' => [
+                'required'
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator->errors());
+        }
+        
+        DB::beginTransaction();
+        
+        try {
+            $user = Auth::user();
+            
+            $school = $user->school()->first();
+
+            $school->information()->whereIn('information.id', $request->keys)->delete();
+
+            DB::commit();
+
+            return $this->success('删除成功');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            
+            return $this->failed($th->getMessage());
+        }
+    }
 }

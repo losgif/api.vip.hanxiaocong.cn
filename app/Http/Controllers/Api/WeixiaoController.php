@@ -135,7 +135,7 @@ class WeixiaoController extends Controller
                                     $token = $this->generateToken($expiredMinutes);
 
                                     $title = "点击查看联系方式";
-                                    $url = "https://ujnhand.losgif.com/information/{$info->id}/{$token}";
+                                    $url = config('app.front_url') . "/information/{$info->id}/{$token}";
                                     $description = '您好，感谢您对本栏目的支持，欢迎给自己报名，祝您早日脱单。';
                                     $image = $info->person_image;
         
@@ -231,7 +231,7 @@ class WeixiaoController extends Controller
 
                 $schoolapplication = $user->application()->where('application_id', $application->id)->first();
 
-                $redirectUrl = \urlencode("/goddess/{$schoolapplication->id}");
+                $redirectUrl = \urlencode("/weixiao/goddess/{$schoolapplication->id}");
                 
                 $url = config('app.front_url') . "/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
                 return redirect($url);
