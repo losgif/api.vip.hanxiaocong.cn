@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Information;
-use App\School;
+use App\SchoolApplication;
 
 class UploadController extends Controller
 {
@@ -71,9 +71,9 @@ class UploadController extends Controller
             if (isset($request->school_application_id) and !empty($request->school_application_id)) {
                 $information->school_application_id = $request->school_application_id;
 
-                $school = School::where('id', $request->school_application_id)->first();
+                $schoolApplication = SchoolApplication::where('id', $request->school_application_id)->first();
 
-                if (empty($school)) {
+                if (empty($schoolApplication)) {
                     $information->school_application_id = 0;
                 }
             } else {
