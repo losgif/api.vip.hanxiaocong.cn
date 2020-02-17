@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\School;
+use App\ApplicationPlatform;
 use DB;
 
 class CloseApplication implements ShouldQueue
