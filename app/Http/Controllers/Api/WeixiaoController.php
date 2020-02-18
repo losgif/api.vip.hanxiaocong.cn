@@ -114,9 +114,12 @@ class WeixiaoController extends Controller
     {
         $school = School::where('media_id', $parameters['media_id'])->first();
 
+        $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
+        $application = $applicationPlatform->application;
+
         if (!empty($school)) {
             $app = app('wechat.official_account');
-            $app->server->push(function ($message) use ($school) {
+            $app->server->push(function ($message) use ($school, $application) {
                 switch ($message['MsgType']) {
                     case 'text':
                         $schookKeywords = $school->keyword;
@@ -135,7 +138,7 @@ class WeixiaoController extends Controller
                                     $token = $this->generateToken($expiredMinutes);
 
                                     $title = "点击查看联系方式";
-                                    $url = config('app.front_url') . "/information/{$info->id}/{$token}";
+                                    $url = config('app.front_url') . "/information/{$info->id}/{$token}/{$application->type}";
                                     $description = '您好，感谢您对本栏目的支持，欢迎给自己报名，祝您早日脱单。';
                                     $image = $info->person_image;
         

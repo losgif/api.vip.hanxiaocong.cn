@@ -40,6 +40,9 @@ class InformationController extends Controller
             'id' => [
                 'required'
             ],
+            'type' => [
+                'required'
+            ]
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +56,21 @@ class InformationController extends Controller
                 $information = Information::where('id', $request->id)->first();
 
                 if ($information) {
-                    return $this->success($information->extra->contact_account);
+                    switch ($request->type) {
+                        case 'goddess':
+                            return $this->success($information->extra->contact_account);
+                            break;
+
+                        case 'roommate':
+                            return $this->success($information->extra->ta_contact_account);
+                            break;
+                        
+                        default:
+                            return $this->failed('你似乎是非法请求');
+                            break;
+                    }
+                    
+                    
                 } else {
                     return $this->failed('查无此信息');
                 }
