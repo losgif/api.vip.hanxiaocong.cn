@@ -12,7 +12,7 @@ class SchoolApplicationKeyword extends Model
      * @var array
      */
     protected $fillable = [
-        'school_id', 'keyword'
+        'school_application_id', 'keyword'
     ];
 
     /**
