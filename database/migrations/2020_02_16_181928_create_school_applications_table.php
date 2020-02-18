@@ -18,6 +18,7 @@ class CreateSchoolApplicationsTable extends Migration
             $table->bigInteger('school_id');
             $table->bigInteger('application_id');
             $table->string('name');
+            $table->string('type');
             $table->string('description');
             $table->string('logo')->nullable();
             $table->text('config')->nullable();

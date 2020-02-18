@@ -16,17 +16,6 @@ class CreateInformationTable extends Migration
         Schema::create('information', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('school_application_id');
-            $table->string('name');
-            $table->string('sex');
-            $table->string('contact_account');
-            $table->string('university');
-            $table->string('department');
-            $table->string('height');
-            $table->string('constellation');
-            $table->string('origin');
-            $table->string('weibo');
-            $table->string('specialty');
-            $table->string('person_image');
             $table->text('extra');
             $table->integer('is_active')->default(0);
             $table->softDeletes();

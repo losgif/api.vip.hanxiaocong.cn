@@ -232,7 +232,7 @@ class WeixiaoController extends Controller
 
                 $schoolapplication = $user->application()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
 
-                $redirectUrl = \urlencode("/weixiao/goddess/{$schoolapplication->id}");
+                $redirectUrl = \urlencode("/weixiao/{$schoolapplication->type}/{$schoolapplication->id}");
                 
                 $url = config('app.front_url') . "/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
                 return redirect($url);

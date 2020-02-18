@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-    .man{
+    .male{
         background-color: #2877b5;
         color: white;
         margin: 3px;
     }
-    .woman{
+    .female{
         background-color: red;
         color: white;
         margin: 3px;
@@ -34,15 +34,15 @@
     @foreach($infos as $info)
 
     <div>
-        <div><span><img width="100%" src='{{$info["upload_url"]}}'></span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp编号：BG{{$info['id']}}&nbsp</span></div>
-        <div><div style="display:block;"><hr class="{{$info['sex']}}" size='5'/></div></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp昵称：</span><span>{{$info['name']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp产地：</span><span>{{$info['brith_place']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp学校：</span><span>{{$info['grade']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp身高：</span><span>{{$info['height']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp个人描述：</span><span>{{$info['detail']}}</span></div>
-        <div><span class="{{$info['sex']}}">&nbsp&nbsp匹配对象：</span><span>{{$info['expect']}}</span></div>
+        <div><span><img width="100%" src='{{$info["extra"]->person_image}}'></span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp编号：BG{{$info['id']}}&nbsp</span></div>
+        <div><div style="display:block;"><hr class="{{$info['extra']->sex}}" size='5'/></div></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp昵称：</span><span>{{$info['extra']->ta_name}}</span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp产地：</span><span>{{$info['extra']->origin}}</span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp学校：</span><span>{{$info['extra']->university}}</span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp身高：</span><span>{{$info['extra']->height}}</span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp个人描述：</span><span>{{$info['extra']->specialty}}</span></div>
+        <div><span class="{{$info['extra']->sex}}">&nbsp&nbsp匹配对象：</span><span>{{$info['extra']->expectation}}</span></div>
         <br>
     </div>
 

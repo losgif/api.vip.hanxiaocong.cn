@@ -17,9 +17,9 @@ Route::group([
     'namespace' => 'Api'
 ], function () {
     Route::group(['prefix' => 'upload'], function() {
-        Route::post('/', 'UploadController@info');
-        Route::post('info', 'UploadController@info');
-        Route::post('image', 'UploadController@image');
+        Route::any('/', 'UploadController@info');
+        Route::any('info', 'UploadController@info');
+        Route::any('image', 'UploadController@image');
     });
 
     Route::group(['prefix' => 'site'], function() {
@@ -81,7 +81,15 @@ Route::group([
         Route::any('batchDelete', 'InformationController@batchDelete');
     });
 
+    Route::group([
+        'prefix' => 'application'
+    ], function () {
+        Route::any('indexByApplicationId', 'ApplicationController@indexByApplicationId');
+    });
+
+
     Route::apiResources([
-        'information' => 'InformationController'
+        'information' => 'InformationController',
+        'schoolApplication' => 'SchoolApplicationController',
     ]);
 });

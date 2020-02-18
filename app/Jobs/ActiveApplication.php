@@ -85,6 +85,7 @@ class ActiveApplication implements ShouldQueue
             $schoolApplication->school_id = $school->id;
             $schoolApplication->application_id = $application->id;
             $schoolApplication->name = $application->name;
+            $schoolApplication->type = $application->type;
             $schoolApplication->description = $application->description;
             $schoolApplication->logo = $application->logo;
             

@@ -53,7 +53,7 @@ class InformationController extends Controller
                 $information = Information::where('id', $request->id)->first();
 
                 if ($information) {
-                    return $this->success($information->contact_account);
+                    return $this->success($information->extra->contact_account);
                 } else {
                     return $this->failed('查无此信息');
                 }
@@ -179,7 +179,8 @@ class InformationController extends Controller
     public function preview(Request $request)
     {
         $this->validate($request, [
-            'array' => 'required'
+            'array' => 'required',
+            'type' => 'required'
         ]);
 
         $ids = json_decode($request->array, true);
@@ -192,6 +193,6 @@ class InformationController extends Controller
             $infos[$key] = Information::find($value)->toArray();
         }
 
-        return view('openInformation',compact('infos'));
+        return view('preview.' . $request->type, compact('infos'));
     }
 }

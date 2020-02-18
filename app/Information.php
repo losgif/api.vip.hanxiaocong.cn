@@ -13,4 +13,9 @@ class Information extends Model
     {
         return $this->belongsTo(SchoolApplication::class, 'school_application_id');
     }
+
+    public function getExtraAttribute($extra)
+    {
+        return json_decode($extra);
+    }
 }
