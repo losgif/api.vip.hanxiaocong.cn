@@ -51,9 +51,9 @@ class UpdateKeyword implements ShouldQueue
                 
                 $schoolapplication->keyword()->delete();
                 
-                collect($this->keywords)->each(function ($keyword) use ($school) {
+                collect($this->keywords)->each(function ($keyword) use ($schoolapplication) {
                     SchoolApplicationKeyword::create([
-                        'school_id' => $school->id,
+                        'school_application_id' => $schoolapplication->id,
                         'keyword' => $keyword,
                     ]);
                 });
