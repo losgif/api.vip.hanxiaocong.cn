@@ -39,11 +39,11 @@ class School extends Model
     /**
      * 查询所属关键字
      *
-     * @return SchoolKeyword
+     * @return SchoolApplicationKeyword
      */
     public function keyword()
     {
-        return $this->hasMany(SchoolKeyword::class);
+        return $this->hasManyThrough(SchoolApplicationKeyword::class, SchoolApplication::class);
     }
 
     /**

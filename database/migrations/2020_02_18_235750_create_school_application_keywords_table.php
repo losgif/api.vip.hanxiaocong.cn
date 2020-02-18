@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolKeywordsTable extends Migration
+class CreateSchoolApplicationKeywordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSchoolKeywordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_keywords', function (Blueprint $table) {
+        Schema::create('school_application_keywords', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('school_id');
+            $table->bigInteger('school_application_id');
             $table->string('keyword');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateSchoolKeywordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_keywords');
+        Schema::dropIfExists('school_application_keywords');
     }
 }

@@ -8,23 +8,24 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\School;
-use App\SchoolKeyword;
+use App\SchoolApplicationKeyword;
+use App\ApplicationPlatform;
 use DB;
 
 class UpdateKeyword implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $mediaId, $keywords;
+    public $parameters, $keywords;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($mediaId, array $keywords)
+    public function __construct($parameters, array $keywords)
     {
-        $this->mediaId = $mediaId;
+        $this->parameters = $parameters;
         $this->keywords = $keywords;
     }
 
@@ -38,14 +39,20 @@ class UpdateKeyword implements ShouldQueue
         DB::beginTransaction();
         
         try {
-            $hasSchool = School::where('media_id', $this->mediaId)->first();
-    
+            $hasSchool = School::where('media_id', $this->parameters['media_id'])->first();
+
+            $applicationPlatform = ApplicationPlatform::where('key', $this->parameters['api_key'])->where(['type' => 'weixiao'])->first();
+            $application = $applicationPlatform->application;
+
             if ($hasSchool) {
                 $school = $hasSchool;
-                $school->keyword()->delete();
+
+                $schoolapplication = $school->schoolApplication()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
+                
+                $schoolapplication->keyword()->delete();
                 
                 collect($this->keywords)->each(function ($keyword) use ($school) {
-                    SchoolKeyWord::create([
+                    SchoolApplicationKeyword::create([
                         'school_id' => $school->id,
                         'keyword' => $keyword,
                     ]);

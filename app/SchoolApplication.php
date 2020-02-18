@@ -20,4 +20,9 @@ class SchoolApplication extends Model
     {
         return $this->hasMany(Information::class);
     }
+
+    public function keyword()
+    {
+        return $this->hasMany(SchoolApplicationKeyword::class);
+    }
 }

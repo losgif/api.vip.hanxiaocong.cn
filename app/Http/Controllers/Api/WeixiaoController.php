@@ -193,8 +193,7 @@ class WeixiaoController extends Controller
         $result = $this->validatorSign($data, $sign);
 
         if ($result) {
-            UpdateKeyword::dispatchNow($data['media_id'], $data['keyword']);
-            // UpdateKeyword::dispatch($data['media_id'], $data['keyword'])->delay(now()->addSeconds(10));
+            UpdateKeyword::dispatchNow($data, $data['keyword']);
 
             $response = [
                 'errcode' => 0,

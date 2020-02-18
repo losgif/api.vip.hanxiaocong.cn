@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolKeyword extends Model
+class SchoolApplicationKeyword extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -16,12 +16,12 @@ class SchoolKeyword extends Model
     ];
 
     /**
-     * 查询所属公众号
+     * 查询所属公众号下应用
      *
-     * @return School
+     * @return SchoolApplication
      */
-    public function school()
+    public function schoolApplication()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(SchoolApplication::class, 'school_application_id');
     }
 }
