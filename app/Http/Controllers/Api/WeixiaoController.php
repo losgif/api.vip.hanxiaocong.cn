@@ -117,7 +117,7 @@ class WeixiaoController extends Controller
         $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
         $application = $applicationPlatform->application;
 
-        $schoolapplication = $school->application()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
+        $schoolapplication = $school->schoolApplication()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
 
         if (!empty($school)) {
             $app = app('wechat.official_account');
