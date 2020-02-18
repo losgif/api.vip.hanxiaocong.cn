@@ -85,12 +85,17 @@ class InformationController extends Controller
         try {
             $user = Auth::user();
             
-            $schoolApplication = $user->application->where('id', $request->id)->first();
+            $schoolApplication = $user->application->where('id', (int)$request->id)->first();
+
+            if (empty($schoolApplication)) {
+                return $this->failed('应用不存在', 403);
+            }
 
             $informations = $schoolApplication->information()->orderBy('id', 'desc')->paginate();
 
             return $this->success($informations);
         } catch (\Throwable $th) {
+            throw $th;
             return $this->failed($th->getMessage());
         }
     }

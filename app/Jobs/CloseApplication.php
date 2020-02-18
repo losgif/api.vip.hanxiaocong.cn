@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\School;
 use App\ApplicationPlatform;
+use App\SchoolApplication;
 use DB;
 
 class CloseApplication implements ShouldQueue
@@ -42,9 +43,12 @@ class CloseApplication implements ShouldQueue
             $applicationPlatform = ApplicationPlatform::where('key', $this->parameters['api_key'])->where(['type' => 'weixiao'])->first();
             $application = $applicationPlatform->application;
 
-            $schoolApplication = $school->schoolApplication()->where('application_id', $application->id)->get();
+            $schoolApplications = SchoolApplication::where('school_id', $school->id)->where('application_id', $application->id)->get();
             
-            $schoolApplication->information()->delete();
+            $schoolApplications->each(function ($schoolApplication) {
+                $schoolApplication->information()->delete();
+                $schoolApplication->delete();
+            });
 
             DB::commit();
         } catch (\Throwable $th) {

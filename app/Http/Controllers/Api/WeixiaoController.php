@@ -230,7 +230,7 @@ class WeixiaoController extends Controller
                 $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
                 $application = $applicationPlatform->application;
 
-                $schoolapplication = $user->application()->where('application_id', $application->id)->first();
+                $schoolapplication = $user->application()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
 
                 $redirectUrl = \urlencode("/weixiao/goddess/{$schoolapplication->id}");
                 
