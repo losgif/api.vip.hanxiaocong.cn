@@ -140,7 +140,20 @@ class WeixiaoController extends Controller
                                     $title = "点击查看联系方式";
                                     $url = config('app.front_url') . "/information/{$info->id}/{$token}/{$application->type}";
                                     $description = '您好，感谢您对本栏目的支持，欢迎给自己报名，祝您早日脱单。';
-                                    $image = $info->person_image;
+                                    
+                                    switch ($application->type) {
+                                        case 'goddess':
+                                            $image = $info->extra->person_image;
+                                            break;
+
+                                        case 'roommate':
+                                            $image = $info->extra->person_image;
+                                            break;
+
+                                        default:
+                                            $image = $info->extra->person_image;
+                                            break;
+                                    }
         
                                     $items = [
                                         new Messages\NewsItem([
