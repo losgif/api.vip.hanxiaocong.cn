@@ -117,9 +117,11 @@ class WeixiaoController extends Controller
         $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
         $application = $applicationPlatform->application;
 
+        $schoolapplication = $school->application()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
+
         if (!empty($school)) {
             $app = app('wechat.official_account');
-            $app->server->push(function ($message) use ($school, $application) {
+            $app->server->push(function ($message) use ($school, $application, $schoolapplication) {
                 switch ($message['MsgType']) {
                     case 'text':
                         $schookKeywords = $school->keyword;
@@ -131,7 +133,7 @@ class WeixiaoController extends Controller
                             if (isset($matches[2])) {
                                 $id = $matches[2];
     
-                                $info = Information::find($id);
+                                $info = $schoolapplication->information()->where('id', $id)->first();
     
                                 if ($info) {
                                     $expiredMinutes = 15;
