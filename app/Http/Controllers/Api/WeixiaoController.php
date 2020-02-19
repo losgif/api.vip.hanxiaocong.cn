@@ -140,7 +140,7 @@ class WeixiaoController extends Controller
                                     $token = $this->generateToken($expiredMinutes);
 
                                     $title = "点击查看联系方式";
-                                    $url = config('app.front_url') . "/information/{$info->id}/{$token}/{$application->type}";
+                                    $url = config('app.front_url') . "information/{$info->id}/{$token}/{$application->type}";
                                     $description = '您好，感谢您对本栏目的支持，欢迎给自己报名，祝您早日脱单。';
                                     
                                     switch ($application->type) {
@@ -242,7 +242,7 @@ class WeixiaoController extends Controller
             $user = $school->user;
 
             if (empty($user)) {
-                return redirect(config('app.front_url') . '/403');
+                return redirect(config('app.front_url') . '403');
             } else {
                 $applicationPlatform = ApplicationPlatform::where('key', $parameters['api_key'])->where(['type' => 'weixiao'])->first();
                 $application = $applicationPlatform->application;
@@ -251,11 +251,11 @@ class WeixiaoController extends Controller
 
                 $redirectUrl = \urlencode("/weixiao/{$schoolapplication->type}/{$schoolapplication->id}");
                 
-                $url = config('app.front_url') . "/user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
+                $url = config('app.front_url') . "user/login?redirect=${redirectUrl}&access_token=" . $user->createToken('AccessToken')->accessToken;
                 return redirect($url);
             }
         } else {
-            return redirect(config('app.front_url') . '/500');
+            return redirect(config('app.front_url') . '500');
         }
     }
 
