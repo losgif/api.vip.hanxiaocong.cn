@@ -193,11 +193,12 @@ class InformationController extends Controller
         }
     }
 
-    public function preview(Request $request)
+    public function preview(Request $request, SchoolApplication $schoolApplication)
     {
         $this->validate($request, [
             'array' => 'required',
-            'type' => 'required'
+            'type'  => 'required',
+            'id'    => 'required'
         ]);
 
         $ids = json_decode($request->array, true);
@@ -206,10 +207,19 @@ class InformationController extends Controller
             'is_active' => 1
         ]);
 
+        $schoolApplicationkeyword = $schoolApplication->where('id', $request->id)->first()->keyword()->first();
+
+        if (empty($schoolApplicationkeyword)) {
+            // return $this->failed('未配置关键词，请联系管理员');
+            return '未配置关键词，请联系管理员';
+        }
+
+        $keyword = $schoolApplicationkeyword->keyword;
+
         foreach ($ids as $key => $value) {
             $infos[$key] = Information::find($value)->toArray();
         }
 
-        return view('preview.' . $request->type, compact('infos'));
+        return view('preview.' . $request->type, compact('infos'))->with('keyword', $keyword);
     }
 }

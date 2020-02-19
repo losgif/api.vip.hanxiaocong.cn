@@ -41,14 +41,15 @@
     <script src="https://cdn.bootcss.com/clipboard.js/2.0.0/clipboard.min.js"></script>
 </head>
 <body>
-    <p>▼▼在平台的聊天框回复对应选手编号▼▼</p><br>
-    <p> 如：BG999，即可获得联系方式</p><br>
+    <p>▼▼在平台的聊天框回复对应嘉宾编号▼▼</p><br>
+    <p> 如：{{$keyword}}999，即可获得联系方式</p><br>
     @foreach($infos as $info)
 
     <div>
         <div class="info">
+            
             <div><img width="100%" src='{{ $info["extra"]->person_image }}'></div>
-            <div><span style="font-size: 16px; color: red;" class="{{ $info['extra']->sex }}">&nbsp&nbsp编号：BG{{$info['id']}}&nbsp</span></div>
+            <div><span style="font-size: 16px; color: red;" class="{{ $info['extra']->sex }}">&nbsp&nbsp嘉宾编号：{{$keyword}}{{$info['id']}}&nbsp</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp昵称：</span><span>{{$info['extra']->name}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp产地：</span><span>{{$info['extra']->origin}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp学校：</span><span>{{$info['extra']->university}}</span></div>

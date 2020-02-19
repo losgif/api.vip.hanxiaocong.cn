@@ -319,7 +319,7 @@ class UploadController extends Controller
                     $path = config('app.url') .$path;
                 }
     
-                return $path;
+                return $this->success($path);
             } else {
                 return $this->failed('系统错误');
             }
