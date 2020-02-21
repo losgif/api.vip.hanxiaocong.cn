@@ -105,7 +105,11 @@ class InformationController extends Controller
         try {
             $user = Auth::user();
             
-            $schoolApplication = $user->application->where('id', (int)$request->id)->first();
+            if ($user->hasRole('super-admin')) {
+                $schoolApplication = SchoolApplication::where('id', (int)$request->id)->first();
+            } else {
+                $schoolApplication = $user->application->where('id', (int)$request->id)->first();
+            }
 
             if (empty($schoolApplication)) {
                 return $this->failed('应用不存在', 403);
