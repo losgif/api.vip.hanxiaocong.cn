@@ -7,6 +7,7 @@ use App\School;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use Illuminate\Validation\Rule;
 use Auth;
 
 class SchoolController extends Controller
@@ -22,6 +23,12 @@ class SchoolController extends Controller
             $user = Auth::user();
         
             $school = $user->school;
+
+            $school = $school->map(function($s) {
+                $s['api'] = config('app.url') . '/api/wechat/' . $s->id;
+
+                return $s;
+            });
             
             return $this->success($school);
         } catch (\Throwable $th) {
@@ -56,7 +63,7 @@ class SchoolController extends Controller
             $school = $user->school;
 
             if (!empty($school) && !$school->isEmpty()) {
-                return $this->failed('已经添加过公众号');
+                return $this->failed('已经配置过公众号');
             }
             
             $school = new School;
@@ -109,7 +116,49 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'media_number' => ['required'],
+            'media_id' => ['required', Rule::unique('schools')->ignore($school->id)],
+            'token' => ['sometimes', 'between:3,32', 'alpha_num'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator->errors());
+        }
+
+        DB::beginTransaction();
+        
+        try {
+            $user = Auth::user();
+
+            $school = $user->school()->where('id', $school->id)->first();
+
+            if (empty($school)) {
+                return $this->failed('非法请求');
+            }
+
+            $school->name = $request->name;
+            $school->media_number = $request->media_number;
+            $school->media_id = $request->media_id;
+            $school->user_id = $user->id;
+
+            if (empty($request->token)) {
+                $school->token = str_random(32);
+            } else {
+                $school->token = $request->token;
+            }
+            
+            $school->save();
+
+            DB::commit();
+
+            return $this->success('更新成功');
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return $this->failed($th->getMessage());
+        }
     }
 
     /**

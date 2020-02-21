@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\SchoolApplication;
 use Auth;
+use App\Http\Resources\SchoolApplicationCollection;
 
 class WorkplaceController extends Controller
 {
@@ -13,9 +14,9 @@ class WorkplaceController extends Controller
     {
         try {
             $user = Auth::user();
-            $applications = $user->application;
+            $applications = $user->application()->with('keyword')->get();
     
-            return $this->success($applications);
+            return $this->success(SchoolApplicationCollection::collection($applications));
         } catch (\Throwable $th) {
             return $this->failed($th->getMessage());
         }

@@ -33,6 +33,7 @@ class SchoolApplicationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'application_id' => ['required'],
+            'name' => ['required'],
             'keyword' => ['required']
         ]);
 
@@ -51,7 +52,7 @@ class SchoolApplicationController extends Controller
             $schoolApplication = new SchoolApplication;
             $schoolApplication->school_id = $school->id;
             $schoolApplication->application_id = $application->id;
-            $schoolApplication->name = $application->name;
+            $schoolApplication->name = $request->name;
             $schoolApplication->type = $application->type;
             $schoolApplication->description = $application->description;
             $schoolApplication->logo = $application->logo;
@@ -106,7 +107,50 @@ class SchoolApplicationController extends Controller
      */
     public function update(Request $request, SchoolApplication $schoolApplication)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'keyword' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator->errors());
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $user = Auth::user();
+            $hasSchoolApplication = $user->application()->where('school_applications.id', $schoolApplication->id)->first();
+            $school = $user->school()->first();
+
+            if (empty($hasSchoolApplication) && !$user->hasRole('super-admin')) {
+                return $this->failed("非法请求");
+            }
+            
+            $schoolApplication->name = $request->name;
+            $schoolApplication->save();
+
+            // foreach ($request->keyword as $keyword) {
+            //     $hasKeyword = $school->keyword()->where('keyword', $keyword)->first();
+
+            //     if ($hasKeyword) {
+            //         return $this->failed("关键词{$keyword}已存在");
+            //     }
+                
+            //     SchoolApplicationKeyword::create([
+            //         'school_application_id' => $schoolApplication->id,
+            //         'keyword' => $keyword,
+            //     ]);
+            // }
+
+            DB::commit();
+
+            return $this->success('更新成功');
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return $this->failed($th->getMessage());
+        }
     }
 
     /**
