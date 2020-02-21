@@ -41,6 +41,7 @@ class SchoolController extends Controller
             'name' => ['required'],
             'media_number' => ['required'],
             'media_id' => ['required', 'unique:schools'],
+            'token' => ['sometimes', 'between:3,32', 'alpha_num'],
         ]);
 
         if ($validator->fails()) {
@@ -63,6 +64,12 @@ class SchoolController extends Controller
             $school->media_number = $request->media_number;
             $school->media_id = $request->media_id;
             $school->user_id = $user->id;
+
+            if (empty($request->token)) {
+                $school->token = str_random(32);
+            } else {
+                $school->token = $request->token;
+            }
             
             $school->save();
 

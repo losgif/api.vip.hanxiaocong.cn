@@ -38,7 +38,11 @@ class SchoolApplicationController extends Controller
         }
         
         try {
-            $users = SchoolApplication::orderBy('id', 'desc')->withCount('information')->paginate($request->pageSize);
+            $users = SchoolApplication::with([
+                'school' => function ($s) {
+                    $s->with('user');
+                }
+            ])->orderBy('id', 'desc')->withCount('information')->paginate($request->pageSize);
 
             return $this->success($users);
         } catch (\Throwable $th) {
@@ -88,6 +92,18 @@ class SchoolApplicationController extends Controller
      */
     public function destroy(SchoolApplication $schoolApplication)
     {
-        //
+        DB::beginTransaction();
+        
+        try {
+            $schoolApplication->delete();
+
+            DB::commit();
+            
+            return $this->success('删除成功');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            
+            return $this->failed($th->getMessage());
+        }
     }
 }

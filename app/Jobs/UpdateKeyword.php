@@ -47,13 +47,13 @@ class UpdateKeyword implements ShouldQueue
             if ($hasSchool) {
                 $school = $hasSchool;
 
-                $schoolapplication = $school->schoolApplication()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
+                $schoolApplication = $school->schoolApplication()->where('application_id', $application->id)->orderBy('id', 'desc')->first();
                 
-                $schoolapplication->keyword()->delete();
+                $schoolApplication->keyword()->delete();
                 
-                collect($this->keywords)->each(function ($keyword) use ($schoolapplication) {
+                collect($this->keywords)->each(function ($keyword) use ($schoolApplication) {
                     SchoolApplicationKeyword::create([
-                        'school_application_id' => $schoolapplication->id,
+                        'school_application_id' => $schoolApplication->id,
                         'keyword' => $keyword,
                     ]);
                 });

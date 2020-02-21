@@ -44,6 +44,10 @@ Route::group([
         Route::any('{apiKey}', 'WeixiaoController@index');
     });
 
+    Route::group(['prefix' => 'wechat'], function() {
+        Route::any('{school}', 'WechatController@serve');
+    });
+
     Route::group([
         'prefix' => 'information'
     ], function () {
@@ -82,17 +86,11 @@ Route::group([
         Route::any('batchDelete', 'InformationController@batchDelete');
     });
 
-    Route::group([
-        'prefix' => 'application'
-    ], function () {
-        Route::any('indexByApplicationId', 'ApplicationController@indexByApplicationId');
-    });
-
-
     Route::apiResources([
         'information' => 'InformationController',
         'schoolApplication' => 'SchoolApplicationController',
         'school' => 'SchoolController',
+        'application' => 'ApplicationController',
     ]);
 });
 
@@ -100,9 +98,16 @@ Route::group([
     'namespace' => 'Api\Admin',
     'prefix' => 'admin',
     'middleware' => [
-        'auth:api'
+        'auth:api',
+        \App\Http\Middleware\ChekeAdminRole::class
     ]
 ],function () {
+    Route::group([
+        'prefix' => 'workplace'
+    ], function () {
+        Route::get('/', 'WorkplaceController@index');
+    });
+
     Route::group([
         'prefix' => 'user'
     ], function () {
