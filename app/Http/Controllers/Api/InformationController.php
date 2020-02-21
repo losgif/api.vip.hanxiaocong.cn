@@ -93,6 +93,9 @@ class InformationController extends Controller
             'id' => [
                 'required'
             ],
+            'pageSize' => [
+                'required'
+            ]
         ]);
 
         if ($validator->fails()) {
@@ -108,7 +111,7 @@ class InformationController extends Controller
                 return $this->failed('应用不存在', 403);
             }
 
-            $informations = $schoolApplication->information()->orderBy('id', 'desc')->paginate();
+            $informations = $schoolApplication->information()->orderBy('id', 'desc')->paginate($request->pageSize);
 
             return $this->success($informations);
         } catch (\Throwable $th) {

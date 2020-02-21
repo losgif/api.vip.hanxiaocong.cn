@@ -9,6 +9,8 @@ use DB;
 use App\User;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+use Illuminate\Validation\Rule;
+use Hash;
 
 class UserController extends Controller
 {
@@ -58,19 +60,49 @@ class UserController extends Controller
     {
         try {
             $user = Auth::user();
-            $user = User::where('id', $user->id)->with([
-                'role' => function ($r) {
-                    $r->with([
-                        'permission' => function ($p) {
-                            $p->orderBy('id', 'desc');
-                        }
-                    ])->orderBy('id', 'desc')->first();
-                }
-            ])->first();
+            $user = User::where('id', $user->id)->with(['role' => function($r) {
+                $r->with('permission');
+            }])->first();
             
             return $this->success($user);
         } catch (\Throwable $th) {
             return $this->failed($th->getMessage());
+        }
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'  => ['required', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', Rule::unique('users')->ignore($user->id)],
+            'phone' => ['required', Rule::unique('users')->ignore($user->id)],
+            'password' => ['sometimes']
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator->errors());
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+
+            if (isset($request->password) && !empty($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
+
+            DB::commit();
+
+            return $this->success('更新成功');
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return $this->failed($e->getMessage());
         }
     }
 

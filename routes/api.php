@@ -62,8 +62,9 @@ Route::group([
         'prefix' => 'user',
     ], function () {
         Route::any('search', 'UserController@search');
-        Route::any('assignRole', 'UserController@assignRole');
+        // Route::any('assignRole', 'UserController@assignRole');
         Route::any('getInfo', 'UserController@getInfo');
+        Route::put('{user}', 'UserController@update');
     });
 
     Route::group([
@@ -90,6 +91,32 @@ Route::group([
 
     Route::apiResources([
         'information' => 'InformationController',
+        'schoolApplication' => 'SchoolApplicationController',
+        'school' => 'SchoolController',
+    ]);
+});
+
+Route::group([
+    'namespace' => 'Api\Admin',
+    'prefix' => 'admin',
+    'middleware' => [
+        'auth:api'
+    ]
+],function () {
+    Route::group([
+        'prefix' => 'user'
+    ], function () {
+        Route::post('indexAll', 'UserController@indexAll');
+    });
+
+    Route::group([
+        'prefix' => 'schoolApplication'
+    ], function () {
+        Route::post('indexAll', 'SchoolApplicationController@indexAll');
+    });
+    
+    Route::apiResources([
+        'user' => 'UserController',
         'schoolApplication' => 'SchoolApplicationController',
     ]);
 });

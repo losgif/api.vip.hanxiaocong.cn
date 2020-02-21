@@ -89,9 +89,6 @@
                 <div class="rule">
                         <span>7.本平台大型脱单服务栏目，让你从此不再一个人。</span>       
                 </div>
-                <div class="rule">
-                        <span>8.本功能有小葱工作室开发，有问题请联系：ujnhand@qq.com</span>
-                </div>
             </div>
             <div class="weui-cells__title">被卖人（TA的昵称）*</div>
             <div class="weui-cells">

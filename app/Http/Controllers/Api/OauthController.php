@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
-use App\Models\UserOauth;
-use App\Models\User;
+use App\UserOauth;
+use App\User;
 use DB;
 use App\Services\Sms;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +14,7 @@ use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Auth\Events\Registered;
 use App\Rules\VerifyCode;
+use Illuminate\Validation\Rule;
 
 /**
  * 认证类
@@ -23,7 +24,7 @@ class OauthController extends Controller
     use Sms;
     use AuthenticatesUsers;
 
-    public $name;
+    public $nameField;
 
     /**
      * 设置名称字段
@@ -32,7 +33,7 @@ class OauthController extends Controller
      */
     public function username()
     {
-        return 'name';
+        return $this->nameField;
     }
 
     /**
@@ -45,15 +46,31 @@ class OauthController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'password' => 'required'
+                'name' => 'sometimes',
+                'email' => 'sometimes',
+                'phone' => 'sometimes',
+                'verify_code' => [
+                    Rule::requiredIf($request->phone),
+                    new VerifyCode($request->phone)
+                ],
+                'password' => [
+                    Rule::requiredIf(empty($request->phone))
+                ]
             ]);
 
             if ($validator->fails()) {
                 return $this->failed($validator->errors());
             }
 
-            $this->name = $request->name;
+            if (!empty($request->name)) {
+                $this->nameField = 'name';
+            } else if (!empty($request->email)) {
+                $this->nameField = 'email';
+            } else if (!empty($request->phone)) {
+                $this->nameField = 'phone';
+            } else {
+                return $this->failed('请输入账户');
+            }
 
             // If the class is using the ThrottlesLogins trait, we can automatically throttle
             // the login attempts for this application. We'll key this by the username and
@@ -65,12 +82,27 @@ class OauthController extends Controller
                 return $this->failed('锁定登陆');
             }
 
-            if ($this->attemptLogin($request)) {
+            if ($this->username() !== 'phone' && $this->attemptLogin($request)) {
                 $user = Auth::user();
+
+                if (!$user->hasRole('super-admin') && $user->status != 1) {
+                    return $this->failed("禁止登录", 403);
+                }
                 
                 $userInfo = collect();
                 $userInfo['token'] = $user->createToken('AccessToken')->accessToken;
                 
+                return $this->success($userInfo);
+            } elseif ($this->username() === 'phone') {
+                $user = User::where('phone', $request->phone)->first();
+
+                if (!$user->hasRole('super-admin') && $user->status != 1) {
+                    return $this->failed("禁止登录", 403);
+                }
+
+                $userInfo = collect();
+                $userInfo['token'] = $user->createToken('AccessToken')->accessToken;
+
                 return $this->success($userInfo);
             }
 
@@ -83,6 +115,7 @@ class OauthController extends Controller
 
             return $this->succcess();
         } catch (\Exception $e) {
+            throw $e;
             return $this->failed($e->getMessage());
         }
     }
@@ -96,7 +129,7 @@ class OauthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'name' => ['sometimes', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['required', 'unique:users'],
@@ -132,14 +165,16 @@ class OauthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'name' => isset($data['name']) ? $data['name'] : '用户_' . str_random(8),
             'email' => $data['email'],
-            'agent_id' => isset($data['agent_id']) && !empty($data['agent_id']) ? $data['agent_id'] : 0,
-            'community_header_id' => isset($data['community_header_id']) && !empty($data['community_header_id']) ? $data['community_header_id'] : 0,
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
         ]);
+
+        $user->assignRole('vistor');
+
+        return $user;
     }
 
     /**
@@ -152,6 +187,9 @@ class OauthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'phone' => ['required', 'regex:/^1[3456789]\d{9}$/'],
+            'ticket' => ['required'],
+            'randstr' => ['required'],
+            'appid' => ['required']
         ]);
 
         if ($validator->fails()) {
@@ -159,12 +197,25 @@ class OauthController extends Controller
         }
 
         try {
-            $this->sendSms($request->phone);
+            $paramters['aid'] = config('captcha.app_id');
+            $paramters['AppSecretKey'] = config('captcha.app_secret');
+            $paramters['Ticket'] = $request->ticket;
+            $paramters['Randstr'] = $request->randstr;
+            $paramters['UserIP'] = $request->getClientIp();
+            
+            $requestResult = file_get_contents('https://ssl.captcha.qq.com/ticket/verify?' . http_build_query($paramters));
+            $captchaResult = json_decode($requestResult);
 
-            return $this->success([
-                "seconds" => 60,
-                "msg"     => "验证码已发送"
-            ]);
+            if (isset($captchaResult->response) && $captchaResult->response == 1) {
+                $this->sendSms($request->phone);
+
+                return $this->success([
+                    "seconds" => 60,
+                    "msg"     => "验证码已发送"
+                ]);
+            }
+
+            throw new \Exception("人机验证失败", 1);
         } catch (\Exception $e) {
             return $this->failed($e->getMessage());
         }

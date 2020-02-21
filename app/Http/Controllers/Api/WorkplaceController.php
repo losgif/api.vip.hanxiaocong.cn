@@ -27,6 +27,10 @@ class WorkplaceController extends Controller
             $user = Auth::user();
         
             $school = $user->school()->withCount('information')->first();
+
+            if (empty($school)) {
+                return $this->failed('请绑定公众号');
+            }
     
             $informations = $school->information()->where('is_active', 0)->with('application')->orderBy('id', 'desc')->limit(10)->get();
     
