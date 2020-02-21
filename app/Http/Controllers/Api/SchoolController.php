@@ -25,7 +25,7 @@ class SchoolController extends Controller
             $school = $user->school;
 
             $school = $school->map(function($s) {
-                $s['api'] = config('app.url') . '/api/wechat/' . $s->id;
+                $s['api'] = config('app.front_url') . '/api/wechat/' . $s->id;
 
                 return $s;
             });
