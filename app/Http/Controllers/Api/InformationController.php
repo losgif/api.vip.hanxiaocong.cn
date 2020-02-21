@@ -185,10 +185,14 @@ class InformationController extends Controller
         
         try {
             $user = Auth::user();
-            
-            $school = $user->school()->first();
 
-            $school->information()->whereIn('information.id', $request->keys)->delete();
+            if ($user->hasRole('super-admin')) {
+                Information::whereIn('id', $request->keys)->delete();
+            } else {
+                $school = $user->school()->first();
+                $school->information()->whereIn('information.id', $request->keys)->delete();
+            }
+
 
             DB::commit();
 
