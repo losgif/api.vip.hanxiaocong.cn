@@ -20,6 +20,7 @@ class CreateSchoolsTable extends Migration
             $table->string('media_number')->nullable();
             $table->string('avatar_image')->nullable();
             $table->string('media_id');
+            $table->string('token');
             $table->string('media_type')->nullable();
             $table->string('media_url')->nullable();
             $table->string('school_name')->nullable();

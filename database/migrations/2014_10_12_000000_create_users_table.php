@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email', 64)->nullable()->unique();
+            $table->string('phone')->nullable();
             $table->string('password');
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('is_admin')->default(0);
