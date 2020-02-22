@@ -14,7 +14,7 @@ class UpdateUsersPhoneTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->index()->after('email');
+            $table->string('phone')->index()->nullable()->after('email');
         });
     }
 
@@ -27,7 +27,7 @@ class UpdateUsersPhoneTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('phone');
-            $table-dropIndex('users_phone_index');
+            $table->dropIndex('users_phone_index');
         });
     }
 }

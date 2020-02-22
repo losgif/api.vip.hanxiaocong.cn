@@ -20,6 +20,7 @@ Route::group([
         Route::any('/', 'UploadController@info');
         Route::any('info', 'UploadController@info');
         Route::any('image', 'UploadController@image');
+        Route::any('fetchToken', 'UploadController@fetchToken');
     });
 
     Route::group(['prefix' => 'site'], function() {

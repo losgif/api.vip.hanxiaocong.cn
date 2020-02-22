@@ -8,9 +8,37 @@ use Validator;
 use DB;
 use App\Information;
 use App\SchoolApplication;
+use zgldh\QiniuStorage\QiniuStorage;
 
 class UploadController extends Controller
 {
+    /**
+     * 生成上传Token
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function fetchToken(Request $request)
+    {
+        try {
+            $disk = QiniuStorage::disk('qiniu');
+            
+            $response['token'] = $disk->uploadToken();
+            $response['domain'] = config('filesystems.disks.qiniu.domains.default');
+    
+            return $this->success($response);
+        } catch (\Throwable $th) {
+            return $this->failed($th->getMessage());
+        }
+    }
+
+    /**
+     * 上传信息处理函数
+     *
+     * @param Request $request
+     * @param Information $information
+     * @return Response
+     */
     public function info(Request $request, Information $information)
     {   
         $validator = Validator::make($request->all(), [
@@ -101,8 +129,20 @@ class UploadController extends Controller
             $extra['origin'] = $request->origin;
             $extra['specialty'] = $request->specialty;
             $extra['expectation'] = $request->expectation;
-            $extra['person_image'] = $request->person_image[0]['url'];
 
+            if (\is_string($request->person_image)) {
+                if (config('filesystems.default') == 'qiniu') {
+                    $path = config('filesystems.disks.qiniu.domains.default') . $request->person_image;
+                } else {
+                    $path = config('app.url') . $request->person_image;
+                }
+                $extra['person_image'] = $path;
+            } else if (\is_array($request->person_image)) {
+                $extra['person_image'] = $request->person_image[0]['url'];
+            } else {
+                return $this->failed('非法请求');
+            }
+            
             $information->extra = \json_encode($extra);
             $information->save();
 
