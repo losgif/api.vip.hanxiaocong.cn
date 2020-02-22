@@ -61,6 +61,7 @@ class ActiveApplication implements ShouldQueue
             }
             
             $school->media_id = $this->parameters['media_id'];
+            $school->token = 'weixiao';
             $school->user_id = $user->id;
 
             $result = $this->getWeixiaoInfo($this->parameters['media_id'], $applicationPlatform->key, $applicationPlatform->secret);

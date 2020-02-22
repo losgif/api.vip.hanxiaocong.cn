@@ -282,7 +282,7 @@ class WeixiaoController extends Controller
             $response = [
                 'errcode' => 0,
                 'errmsg' => 'OK',
-                'token' => 'wechat',
+                'token' => 'weixiao',
                 'is_config' => 1
             ];
         } else {
