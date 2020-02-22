@@ -64,6 +64,10 @@ class InformationController extends Controller
                         case 'roommate':
                             return $this->success($information->extra->ta_contact_account);
                             break;
+
+                        case 'single':
+                            return $this->success($information->extra->contact_account);
+                            break;
                         
                         default:
                             return $this->failed('你似乎是非法请求');

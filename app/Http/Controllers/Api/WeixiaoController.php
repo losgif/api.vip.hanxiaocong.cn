@@ -151,6 +151,10 @@ class WeixiaoController extends Controller
                                         case 'roommate':
                                             $image = $info->extra->person_image;
                                             break;
+                                        
+                                        case 'single':
+                                            $image = $info->extra->person_image;
+                                            break;
 
                                         default:
                                             $image = $info->extra->person_image;
