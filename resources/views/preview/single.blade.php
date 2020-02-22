@@ -52,12 +52,12 @@
             <div><span style="font-size: 16px; color: red;" class="{{ $info['extra']->sex }}">&nbsp&nbsp嘉宾编号：{{$keyword}}{{$info['id']}}&nbsp</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp昵称：</span><span>{{$info['extra']->name}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp产地：</span><span>{{$info['extra']->origin}}</span></div>
-            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp学校：</span><span>{{$info['extra']->university}}</span></div>
-            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp座右铭：</span><span>{{$info['extra']->department}}</span></div>
+            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp教育背景：</span><span>{{$info['extra']->university}}</span></div>
+            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp工作类型：</span><span>{{$info['extra']->department}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp身高：</span><span>{{$info['extra']->height}}CM</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp星座：</span><span>{{$info['extra']->constellation}}</span></div>
-            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp微博：</span><span>{{$info['extra']->weibo}}</span></div>
-            <div><span style="white-space: pre-line;" class="{{ $info['extra']->sex }}">&nbsp&nbsp特长：</span><span>{{$info['extra']->specialty}}</span></div>
+            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp期望发展城市：</span><span>{{$info['extra']->weibo}}</span></div>
+            <div><span style="white-space: pre-line;" class="{{ $info['extra']->sex }}">&nbsp&nbsp目前活动范围：</span><span>{{$info['extra']->specialty}}</span></div>
         </div>
         <br>
         @if (!empty(($info['extra']->extensions)))
