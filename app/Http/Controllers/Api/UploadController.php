@@ -130,18 +130,12 @@ class UploadController extends Controller
             $extra['specialty'] = $request->specialty;
             $extra['expectation'] = $request->expectation;
 
-            if (\is_string($request->person_image)) {
-                if (config('filesystems.default') == 'qiniu') {
-                    $path = config('filesystems.disks.qiniu.domains.default') . $request->person_image;
-                } else {
-                    $path = config('app.url') . $request->person_image;
-                }
-                $extra['person_image'] = $path;
-            } else if (\is_array($request->person_image)) {
-                $extra['person_image'] = $request->person_image[0]['url'];
+            if (config('filesystems.default') == 'qiniu') {
+                $path = $request->person_image;
             } else {
-                return $this->failed('非法请求');
+                $path = config('app.url') . $request->person_image;
             }
+            $extra['person_image'] = $path;
             
             $information->extra = \json_encode($extra);
             $information->save();
@@ -215,7 +209,7 @@ class UploadController extends Controller
             $extra['origin'] = $request->origin;
             $extra['weibo'] = $request->weibo;
             $extra['specialty'] = $request->specialty;
-            $extra['person_image'] = $request->person_image[0]['url'];
+            $extra['person_image'] = $request->person_image;
 
             $extra['extensions'] = [];
 
@@ -223,7 +217,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_1']['title'] = "自我评价";
                 $extra['extensions']['question_1']['content'] = $request->question_1;
                 if (isset($request->question_image_1) and !empty($request->question_image_1)) {
-                    $extra['extensions']['question_1']['image'] = $request->question_image_1[0]['url'];
+                    $extra['extensions']['question_1']['image'] = $request->question_image_1;
                 } else {
                     unset($extra['extensions']['question_1']);
                 }
@@ -233,7 +227,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_2']['title'] = "爱情观";
                 $extra['extensions']['question_2']['content'] = $request->question_2;
                 if (isset($request->question_image_2) and !empty($request->question_image_2)) {
-                    $extra['extensions']['question_2']['image'] = $request->question_image_2[0]['url'];
+                    $extra['extensions']['question_2']['image'] = $request->question_image_2;
                 } else {
                     unset($extra['extensions']['question_2']);
                 }
@@ -243,7 +237,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_3']['title'] = "在大学的改变";
                 $extra['extensions']['question_3']['content'] = $request->question_3;
                 if (isset($request->question_image_3) and !empty($request->question_image_3)) {
-                    $extra['extensions']['question_3']['image'] = $request->question_image_3[0]['url'];
+                    $extra['extensions']['question_3']['image'] = $request->question_image_3;
                 } else {
                     unset($extra['extensions']['question_3']);
                 }
@@ -253,7 +247,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_4']['title'] = "生活中发生过的囧事";
                 $extra['extensions']['question_4']['content'] = $request->question_4;
                 if (isset($request->question_image_4) and !empty($request->question_image_4)) {
-                    $extra['extensions']['question_4']['image'] = $request->question_image_4[0]['url'];
+                    $extra['extensions']['question_4']['image'] = $request->question_image_4;
                 } else {
                     unset($extra['extensions']['question_4']);
                 }
@@ -263,7 +257,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_5']['title'] = "喜欢的偶像";
                 $extra['extensions']['question_5']['content'] = $request->question_5;
                 if (isset($request->question_image_5) and !empty($request->question_image_5)) {
-                    $extra['extensions']['question_5']['image'] = $request->question_image_5[0]['url'];
+                    $extra['extensions']['question_5']['image'] = $request->question_image_5;
                 } else {
                     unset($extra['extensions']['question_5']);
                 }
@@ -273,7 +267,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_6']['title'] = "参加活动的收获";
                 $extra['extensions']['question_6']['content'] = $request->question_6;
                 if (isset($request->question_image_6) and !empty($request->question_image_6)) {
-                    $extra['extensions']['question_6']['image'] = $request->question_image_6[0]['url'];
+                    $extra['extensions']['question_6']['image'] = $request->question_image_6;
                 } else {
                     unset($extra['extensions']['question_6']);
                 }
@@ -283,7 +277,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_7']['title'] = "未来规划";
                 $extra['extensions']['question_7']['content'] = $request->question_7;
                 if (isset($request->question_image_7) and !empty($request->question_image_7)) {
-                    $extra['extensions']['question_7']['image'] = $request->question_image_7[0]['url'];
+                    $extra['extensions']['question_7']['image'] = $request->question_image_7;
                 } else {
                     unset($extra['extensions']['question_7']);
                 }
@@ -293,7 +287,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_8']['title'] = "小梦想";
                 $extra['extensions']['question_8']['content'] = $request->question_8;
                 if (isset($request->question_image_8) and !empty($request->question_image_8)) {
-                    $extra['extensions']['question_8']['image'] = $request->question_image_8[0]['url'];
+                    $extra['extensions']['question_8']['image'] = $request->question_image_8;
                 } else {
                     unset($extra['extensions']['question_8']);
                 }
@@ -303,7 +297,7 @@ class UploadController extends Controller
                 $extra['extensions']['question_9']['title'] = "对学弟学妹说的话";
                 $extra['extensions']['question_9']['content'] = $request->question_9;
                 if (isset($request->question_image_9) and !empty($request->question_image_9)) {
-                    $extra['extensions']['question_9']['image'] = $request->question_image_9[0]['url'];
+                    $extra['extensions']['question_9']['image'] = $request->question_image_9;
                 } else {
                     unset($extra['extensions']['question_9']);
                 }
