@@ -384,7 +384,7 @@ class UploadController extends Controller
             $extra['extensions'] = [];
 
             if (isset($request->question_1) and !empty($request->question_1)) {
-                $extra['extensions']['question_1']['title'] = "兴趣爱好以及性格";
+                $extra['extensions']['question_1']['title'] = "兴趣爱好";
                 $extra['extensions']['question_1']['content'] = $request->question_1;
                 if (isset($request->question_image_1) and !empty($request->question_image_1)) {
                     $extra['extensions']['question_1']['image'] = $request->question_image_1;
@@ -394,7 +394,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_2) and !empty($request->question_2)) {
-                $extra['extensions']['question_2']['title'] = "人生经历分享";
+                $extra['extensions']['question_2']['title'] = "人生的经历分享";
                 $extra['extensions']['question_2']['content'] = $request->question_2;
                 if (isset($request->question_image_2) and !empty($request->question_image_2)) {
                     $extra['extensions']['question_2']['image'] = $request->question_image_2;
@@ -404,7 +404,7 @@ class UploadController extends Controller
             }
             
             if (isset($request->question_3) and !empty($request->question_3)) {
-                $extra['extensions']['question_3']['title'] = "一段简单地自我介绍";
+                $extra['extensions']['question_3']['title'] = "自我介绍";
                 $extra['extensions']['question_3']['content'] = $request->question_3;
                 if (isset($request->question_image_3) and !empty($request->question_image_3)) {
                     $extra['extensions']['question_3']['image'] = $request->question_image_3;
@@ -414,7 +414,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_4) and !empty($request->question_4)) {
-                $extra['extensions']['question_4']['title'] = "好友对你的印象或评价";
+                $extra['extensions']['question_4']['title'] = "好友印象";
                 $extra['extensions']['question_4']['content'] = $request->question_4;
                 if (isset($request->question_image_4) and !empty($request->question_image_4)) {
                     $extra['extensions']['question_4']['image'] = $request->question_image_4;
@@ -424,7 +424,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_5) and !empty($request->question_5)) {
-                $extra['extensions']['question_5']['title'] = "你的爱情观";
+                $extra['extensions']['question_5']['title'] = "爱情观";
                 $extra['extensions']['question_5']['content'] = $request->question_5;
                 if (isset($request->question_image_5) and !empty($request->question_image_5)) {
                     $extra['extensions']['question_5']['image'] = $request->question_image_5;
@@ -434,7 +434,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_6) and !empty($request->question_6)) {
-                $extra['extensions']['question_6']['title'] = "希望未来的他是怎样的？";
+                $extra['extensions']['question_6']['title'] = "关于未来的ta";
                 $extra['extensions']['question_6']['content'] = $request->question_6;
                 if (isset($request->question_image_6) and !empty($request->question_image_6)) {
                     $extra['extensions']['question_6']['image'] = $request->question_image_6;
@@ -444,7 +444,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_7) and !empty($request->question_7)) {
-                $extra['extensions']['question_7']['title'] = "自己单身的原因是什么？";
+                $extra['extensions']['question_7']['title'] = "现在单身的原因";
                 $extra['extensions']['question_7']['content'] = $request->question_7;
                 if (isset($request->question_image_7) and !empty($request->question_image_7)) {
                     $extra['extensions']['question_7']['image'] = $request->question_image_7;
@@ -454,7 +454,7 @@ class UploadController extends Controller
             }
 
             if (isset($request->question_8) and !empty($request->question_8)) {
-                $extra['extensions']['question_8']['title'] = "如果碰到对的那个TA，最希望和对方过什么样的生活？";
+                $extra['extensions']['question_8']['title'] = "如果碰到ta，未来想过的生活";
                 $extra['extensions']['question_8']['content'] = $request->question_8;
                 if (isset($request->question_image_8) and !empty($request->question_image_8)) {
                     $extra['extensions']['question_8']['image'] = $request->question_image_8;

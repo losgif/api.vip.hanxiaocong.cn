@@ -51,7 +51,7 @@
             <div><img width="100%" src='{{ $info["extra"]->person_image }}'></div>
             <div><span style="font-size: 16px; color: red;" class="{{ $info['extra']->sex }}">&nbsp&nbsp嘉宾编号：{{$keyword}}{{$info['id']}}&nbsp</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp昵称：</span><span>{{$info['extra']->name}}</span></div>
-            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp产地：</span><span>{{$info['extra']->origin}}</span></div>
+            <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp籍贯：</span><span>{{$info['extra']->origin}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp教育背景：</span><span>{{$info['extra']->university}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp工作类型：</span><span>{{$info['extra']->department}}</span></div>
             <div><span class="{{ $info['extra']->sex }}">&nbsp&nbsp身高：</span><span>{{$info['extra']->height}}CM</span></div>
