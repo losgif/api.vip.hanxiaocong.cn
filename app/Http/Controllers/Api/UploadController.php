@@ -354,7 +354,7 @@ class UploadController extends Controller
                 $path = $request->image->store('images');
     
                 if (config('filesystems.default') == 'qiniu') {
-                    $path = config('filesystems.disks.qiniu.domain') . $path;
+                    $path = config('filesystems.disks.qiniu.domains.default') . $path;
                 } else {
                     $path = config('app.url') .$path;
                 }
